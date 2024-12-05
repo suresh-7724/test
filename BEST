@@ -1,0 +1,47 @@
+from queue import PriorityQueue
+
+def best_first_search(graph, start, goal, heuristic):
+    open_set = PriorityQueue()
+    open_set.put((heuristic[start], start))
+    visited = set()
+    traversal_order = []
+
+    while not open_set.empty():
+        _, current = open_set.get()
+        if current in visited:
+            continue
+        traversal_order.append(current)
+        visited.add(current)
+        if current == goal:
+            return traversal_order
+        for neighbor in graph[current]:
+            if neighbor not in visited:
+                open_set.put((heuristic[neighbor], neighbor))
+
+    return traversal_order
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F', 'G'],
+    'D': [],
+    'E': ['H'],
+    'F': [],
+    'G': [],
+    'H': []
+}
+
+heuristic = {
+    'A': 7,
+    'B': 6,
+    'C': 4,
+    'D': 5,
+    'E': 3,
+    'F': 6,
+    'G': 2,
+    'H': 0
+}
+
+start = 'A'
+goal = 'H'
+print("Best-First Search Traversal:", best_first_search(graph, start, goal, heuristic))
