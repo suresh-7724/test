@@ -1,0 +1,68 @@
+# Depth-First Search (DFS) implementation
+
+def dfs_recursive(graph, node, visited=None):
+    """
+    Perform DFS traversal recursively on a graph.
+
+    :param graph: Dictionary representing the adjacency list of the graph
+    :param node: Current node to visit
+    :param visited: Set to keep track of visited nodes
+    :return: List of nodes in the order they are visited
+    """
+    if visited is None:
+        visited = set()
+    
+    visited.add(node)
+    traversal_order.append(node)
+
+    for neighbor in graph[node]:
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+
+
+def dfs_iterative(graph, start_node):
+    """
+    Perform DFS traversal iteratively on a graph.
+
+    :param graph: Dictionary representing the adjacency list of the graph
+    :param start_node: Starting node for DFS traversal
+    :return: List of nodes in the order they are visited
+    """
+    visited = set()  # Set to track visited nodes
+    stack = [start_node]  # Stack for DFS
+    traversal_order = []  # List to store traversal order
+
+    while stack:
+        # Pop the top node from the stack
+        current_node = stack.pop()
+
+        if current_node not in visited:
+            visited.add(current_node)
+            traversal_order.append(current_node)
+
+            # Add neighbors to the stack (reverse order for correct DFS)
+            for neighbor in reversed(graph[current_node]):
+                if neighbor not in visited:
+                    stack.append(neighbor)
+
+    return traversal_order
+
+
+# Example graph represented as an adjacency list
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D', 'E'],
+    'C': ['A', 'F'],
+    'D': ['B'],
+    'E': ['B', 'F'],
+    'F': ['C', 'E']
+}
+
+# Recursive DFS traversal
+traversal_order = []
+dfs_recursive(graph, 'A')
+print("DFS Traversal Order (Recursive):", traversal_order)
+
+# Iterative DFS traversal
+traversal_order_iterative = dfs_iterative(graph, 'A')
+print("DFS Traversal Order (Iterative):", traversal_order_iterative)
