@@ -1,0 +1,30 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+file_path = "iris.csv"  # Replace with your file path
+data = pd.read_csv(file_path)
+
+# a. Bar plot for the frequency of the three species
+species_counts = data['species'].value_counts()
+plt.figure(figsize=(8, 6))
+species_counts.plot(kind='bar', color=['blue', 'green', 'orange'])
+plt.title("Frequency of Iris Species")
+plt.xlabel("Species")
+plt.ylabel("Frequency")
+plt.xticks(rotation=0)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.show()
+
+# b. Histogram for the three species
+plt.figure(figsize=(10, 6))
+for species in data['species'].unique():
+    subset = data[data['species'] == species]
+    plt.hist(subset['sepal_length'], bins=10, alpha=0.5, label=species)
+
+plt.title("Histogram of Sepal Length by Species")
+plt.xlabel("Sepal Length")
+plt.ylabel("Frequency")
+plt.legend(title="Species")
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.show()
