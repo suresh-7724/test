@@ -1,0 +1,33 @@
+import json
+
+def lambda_handler(event, context):
+    # Extract input parameters from the event (payload)
+    array = event.get('array', [])
+    target = event.get('target', None)
+    
+    # Perform binary search
+    result = binary_search(array, target)
+    
+    # Return the result
+    return {
+        'statusCode': 200,
+        'body': json.dumps({
+            'found': result is not None,
+            'index': result
+        })
+    }
+
+def binary_search(array, target):
+    left, right = 0, len(array) - 1
+    
+    while left <= right:
+        mid = (left + right) // 2
+        
+        if array[mid] == target:
+            return mid  # Return the index if target is found
+        elif array[mid] < target:
+            left = mid + 1  # Search the right half
+        else:
+            right = mid - 1  # Search the left half
+    
+    return None  # Return None if the target is not found
