@@ -1,0 +1,31 @@
+def binary_search(cities, target):
+    left, right = 0, len(cities) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if cities[mid] == target:
+            return mid
+        elif cities[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
+
+def search_city(city_name):
+    try:
+        with open('city.txt', 'r') as file:
+            cities = [line.strip() for line in file.readlines()]
+        
+        index = binary_search(cities, city_name)
+        
+        if index != -1:
+            print(f"City '{city_name}' found at index {index}.")
+        else:
+            print(f"City '{city_name}' not found.")
+    
+    except FileNotFoundError:
+        print("The file 'city.txt' was not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+city_name_to_search = input("Enter the city name to search: ")
+search_city(city_name_to_search)
