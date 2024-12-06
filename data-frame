@@ -1,0 +1,19 @@
+import pandas as pd
+import numpy as np
+
+# Create a DataFrame
+data = {
+    "Name": ["Alice", "Bob", "Charlie", "Alice", None, "Eve", "Frank", "Grace", None, "Bob"],
+    "Salary": [50000, 60000, None, 50000, 70000, 80000, None, 60000, 90000, 60000],
+    "Department": ["HR", "IT", "Finance", "HR", "IT", None, "Marketing", "Finance", "Marketing", "IT"]
+}
+df = pd.DataFrame(data)
+
+print("Original DataFrame:")
+print(df)
+
+# Drop all rows with null or empty values
+df_cleaned = df.dropna().drop_duplicates()
+
+print("\nModified DataFrame (Null and Duplicate Values Dropped):")
+print(df_cleaned)
