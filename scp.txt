@@ -1,0 +1,9 @@
+scp -v ec2-user@ec2-ip:/home/ubuntu/example.txt /local_backup/
+scp -v ec2-user@ec2-ip:/home/ubuntu/files/file{1..3}.txt /local_files/
+scp -r -p -v ec2-user@ec2-ip:/var/www /web_backup/
+scp -v /local_reports/report.csv ec2-user@ec2-ip:/home/$username/reports/
+scp -v /documents/doc{1..3}.pdf ec2-user@ec2-ip:/home/$username/docs/
+scp -r -p -v /images ec2-user@ec2-ip:/home/$username/media/
+scp -C largefile.tar.gz ec2-user@ec2-ip:/home/$username/
+scp -r -p /dir ec2-user@ec2-ip:/home/$username/
+scp -v /path/to/file ec2-user@ec2-ip:/path/on/server/

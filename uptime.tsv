@@ -1,0 +1,11 @@
+#!/bin/bash
+
+FILE="uptime_data.tsv"
+
+while true; do
+    TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
+    UPTIME=$(uptime -p)
+    echo -e "$TIMESTAMP\t$UPTIME" >> "$FILE"
+    sort -r "$FILE" -o "$FILE"
+    sleep 300  # 5 minutes
+done
