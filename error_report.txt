@@ -1,2 +1,0 @@
-./multiplication_table.txt: 0
-./error_report.txt: 0
